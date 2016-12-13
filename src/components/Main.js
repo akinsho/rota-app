@@ -1,10 +1,12 @@
 var React = require('react')
+import Navigation from './Navigation.js'
+
 var main = React.createClass({
   render: function(){
     return(
       <div>
-      <div>{this.props.children}</div>
-      Main.jsx
+      <Navigation/>
+      {this.props.children}
       </div>
     )
   }

@@ -1,4 +1,6 @@
-var React = require('react');
+import React from 'react';
+import {Link} from 'react-router'
+
 
 var Navigation = React.createClass({
   render: function(){
@@ -9,15 +11,15 @@ var Navigation = React.createClass({
         </div>
         <div className="menu-bar-right">
           <ul className="menu">
-            <a><li className="menu-items">
-              Home
-            </li></a>
-            <a><li className="menu-items">
+            <li className="menu-items">
+              <Link to="/Home" activeClassName="active" activeStyle={{fontWeight:"bold"}}>Home</Link>
+            </li>
+            <li className="menu-items">
               Profile
-            </li></a>
-            <a><li className="menu-items">
-              My Rota
-            </li></a>
+            </li>
+            <li className="menu-items">
+              <Link to="/Rota" activeStyle={{fontWeight:"bold"}} activeClassName="active">My Rota</Link>
+            </li>
           </ul>
         </div>
       </div>

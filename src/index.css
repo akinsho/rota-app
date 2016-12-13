@@ -5,13 +5,15 @@ body {
   /*background-color: yellow;*/
 }
 .main{
-  margin-top: 3em;
+  margin-top: 3.5em;
 }
 .menu-bar{
   position: fixed;
+  top: 0;
+  left: 0;
   height: 3em;
   width: 100%;
-  border: solid black 2px;
+  /*border: solid black 2px;*/
   background-color: #59b4f5;
 }
 .menu-bar-left{
