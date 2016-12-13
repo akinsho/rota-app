@@ -1,27 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2|Lato|Roboto');
+
+:root{
+--title: white;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  /*background-color: yellow;*/
 }
 .main{
   margin-top: 3.5em;
+  text-align: center;
+  font-family: "Lato", sans-serif;
 }
+
+
 .menu-bar{
   position: fixed;
   top: 0;
   left: 0;
   height: 3em;
   width: 100%;
-  /*border: solid black 2px;*/
+  font-family: "Lato", sans-serif;
   background-color: #59b4f5;
+  box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.43);
 }
 .menu-bar-left{
   float: left;
+  height: 100%;
 }
+
+.menu-title{
+  color: var(--title);
+  padding: 1em 1em 1em 1em;
+  height: 100%;
+  max-height: 100%;
+  font-size: 2em;
+}
+
+
 .menu-bar-right{
   float: right;
   height: 100%;
+
 }
 .menu{
   height: 100%;
@@ -30,12 +51,18 @@ body {
 }
 .menu-items{
   float: right;
-  margin: 0em 1em;
+  padding: 1em 1em;
   list-style-type: none;
-  border-left: black solid 1px;
-  height: 100%;
+  border-left: hsla(360, 100%, 100%, 0.5) solid 1px;
+  max-height: 100%;
   text-align: center;
+
 }
 .menu-items:hover{
-  background-color: hsl(199, 77%, 57%,0.6)
+  background-color: hsla(210, 59%, 55%,0.5);
+}
+
+a{
+ text-decoration: none;
+ color: white;
 }

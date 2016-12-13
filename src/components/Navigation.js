@@ -7,18 +7,18 @@ var Navigation = React.createClass({
     return(
       <div className="menu-bar">
         <div className="menu-bar-left">
-              Navigation
+          <span className="menu-title">Render Rota</span>
         </div>
         <div className="menu-bar-right">
           <ul className="menu">
             <li className="menu-items">
-              <Link to="/Home" activeClassName="active" activeStyle={{fontWeight:"bold"}}>Home</Link>
+              <Link to="/Home" activeClassName="active" activeStyle={{fontWeight:"bold", textDecoration:"none"}}>Home</Link>
             </li>
             <li className="menu-items">
-              Profile
+              <Link to="/Profile" activeClassName="active" activeStyle={{fontWeight:"bold", textDecoration:"none"}}>Profile</Link>
             </li>
             <li className="menu-items">
-              <Link to="/Rota" activeStyle={{fontWeight:"bold"}} activeClassName="active">My Rota</Link>
+              <Link to="/Rota" activeStyle={{fontWeight:"bold", textDecoration:"none"}} activeClassName="active">My Rota</Link>
             </li>
           </ul>
         </div>

@@ -1,13 +1,13 @@
 import React from 'react'
 
-var Home = React.createClass({
+var Profile = React.createClass({
   render: function(){
     return(
       <div className="main">
-        Home Page
+        Profile Page
       </div>
     )
   }
 });
 
-module.exports = Home;
+module.exports= Profile;
