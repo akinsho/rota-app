@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import {Route, Router, IndexRoute, hashHistory} from 'react-router';
+import main from './components/main';
 class App extends Component {
   render() {
     return (
