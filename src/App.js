@@ -20,7 +20,18 @@ injectGlobal`
   }
 `;
 
-const store = createStore(reducer);
+const defaultState = {
+  pending: {
+    may: {
+      shifts: ['A&E'],
+    },
+    february: {
+      shifts: ['T&O'],
+    },
+  },
+};
+
+const store = createStore(reducer, defaultState);
 
 class App extends Component {
   render() {

@@ -12,11 +12,12 @@ const PageLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content:center;
 `;
 const CalendarContainer = styled.div`
    display: grid;
-   grid-template-columns: repeat(7, 5rem)
-   grid-template-rows: repeat(7, 5rem)
+   grid-template-columns: repeat(7, 8rem);
+   grid-template-rows: repeat(7, 8rem);
    grid-template-areas:"weekdays weekdays weekdays weekdays weekdays weekdays weekdays "
    "days days days days days days days ";
    grid-gap:0.2rem 0.2rem;
@@ -35,8 +36,8 @@ const Day = styled.div`
   display: grid;
   grid-area: days
   border: 1px solid skyBlue;
-  width: 5rem;
-  height: 5rem;
+  width:100%;
+  height:100%;
 `;
 
 const Title = styled.h1`
@@ -47,14 +48,11 @@ const daysOfWeek = ['mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun'];
 const weeksInAMonth = [0, 1, 2, 3, 4];
 
 class Calendar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
+    console.log('pending', this.props.shifts[month.toLowerCase()]);
     return (
       <PageLayout>
-        <Title>{ month }</Title>
+        <Title>{month}</Title>
         <CalendarContainer>
           {daysOfWeek.map((day, dayIndex) => (
             <div key={uuid()}>
@@ -76,7 +74,10 @@ class Calendar extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  console.log('state', state);
+  return {
+    shifts: state.pending,
+  };
 }
 
 export default connect(mapStateToProps)(Calendar);
