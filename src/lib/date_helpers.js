@@ -1,6 +1,9 @@
-export const currentDate = new Date();
-export const currentYear = currentDate.getFullYear();
-export const currentMonth = currentDate.getMonth();
+const currentDate = new Date();
+const currentYear = currentDate.getFullYear();
+const currentMonth = currentDate.getMonth();
+
+const locale = 'en-us';
+export const month = currentDate.toLocaleString(locale, { month: 'long' });
 
 const getDaysInMonth = (month, year) => {
   // Here January is 1 based

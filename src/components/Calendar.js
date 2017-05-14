@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import styled from 'styled-components';
 
-import { daysInCurrentMonth, getMonth } from './../lib/date_helpers';
+import { daysInCurrentMonth, month } from './../lib/date_helpers';
 
 const PageLayout = styled.div`
   width: 100%;
@@ -54,7 +54,7 @@ class Calendar extends Component {
   render() {
     return (
       <PageLayout>
-        <Title>Calendar</Title>
+        <Title>{ month }</Title>
         <CalendarContainer>
           {daysOfWeek.map((day, dayIndex) => (
             <div key={uuid()}>
