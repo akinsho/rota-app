@@ -8,6 +8,7 @@ const ShiftContainer = styled.section`
   height: 20em;
   border-top: black 1px solid;
   display: flex;
+  margin-top: 1rem;
 `;
 
 const UserCard = styled.article`
@@ -29,16 +30,17 @@ const ShiftDetail = styled.p`
 `;
 
 class Shifts extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <ShiftContainer>
         <UserCard />
         {this.props.currentMonth.shifts.map(shift => (
           <ShiftDay key={uuid()}>
+            <ShiftDetail>
+              Date:
+              {' '}
+              {`${shift.date}/0${this.props.currentMonth.month}/${this.props.currentMonth.year}`}
+            </ShiftDetail>
             <ShiftDetail>Assigned: {shift.assigned}</ShiftDetail>
             <ShiftDetail>Time: {shift.time}</ShiftDetail>
             <ShiftDetail>Grade: {shift.grade}</ShiftDetail>

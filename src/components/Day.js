@@ -15,9 +15,9 @@ const DayContainer = styled.div`
 
 const Day = ({ dayOfMonth, time, assigned, shifts }) => (
   <DayContainer>
-    {dayOfMonth > daysInCurrentMonth ? null : dayOfMonth}
+    {dayOfMonth > Number(daysInCurrentMonth) ? null : dayOfMonth}
     {shifts.map(shift => {
-      if (Number(shift.day.split('/')[0]) === dayOfMonth) {
+      if (shift.date === dayOfMonth) {
         return (
           <div key={uuid()}>
             <p>{shift.time}</p>

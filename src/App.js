@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import styled, { injectGlobal } from 'styled-components';
 
 import Calendar from './components/Calendar';
-import Shifts from './components/Shifts';
+import Nav from './components/Nav';
+import { showShifts } from './actions';
 
 //eslint-disable-next-line
 injectGlobal`
@@ -30,12 +33,15 @@ const AppContainer = styled.div`
 class App extends Component {
   render() {
     return (
-      <AppContainer>
-        <Calendar />
-        <Shifts />
-      </AppContainer>
+      <Router>
+        <AppContainer>
+          <Nav showShifts={this.props.showShifts} />
+          <Route exact path="/" component={Calendar} />
+          {/*<Route path="/"> */}
+        </AppContainer>
+      </Router>
     );
   }
 }
 
-export default App;
+export default connect(null, { showShifts })(App);

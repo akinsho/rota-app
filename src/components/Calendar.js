@@ -5,11 +5,11 @@ import styled from 'styled-components';
 
 import { month } from './../lib/date_helpers';
 import Day from './Day';
+import Shifts from './Shifts';
 
 const PageLayout = styled.div`
   width: 100%;
   height: 100%;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,14 +17,18 @@ const PageLayout = styled.div`
 `;
 const CalendarContainer = styled.div`
    display: grid;
-   grid-template-columns: repeat(7, 8rem);
-   grid-template-rows: repeat(7, 8rem);
+   grid-template-columns: repeat(7, 1fr);
+   grid-template-rows: repeat(5, 1fr);
    grid-template-areas:"weekdays weekdays weekdays weekdays weekdays weekdays weekdays "
    "days days days days days days days ";
    grid-gap:0.2rem 0.2rem;
-   width: 50%;
    height: 50%;
   text-align: center;
+`;
+
+const InnerCalendarContainer = styled.div`
+  width: 100%;
+  height: 7rem;
 `;
 
 const WeekDay = styled.div`
@@ -48,7 +52,7 @@ class Calendar extends Component {
         <Title>{month}</Title>
         <CalendarContainer>
           {daysOfWeek.map((day, dayIndex) => (
-            <div key={uuid()}>
+            <InnerCalendarContainer key={uuid()}>
               <WeekDay>{day}</WeekDay>
               {weeksInAMonth.map((week, weekIndex) => {
                 let dayOfMonth = dayIndex + 1 + weekIndex * 7;
@@ -56,9 +60,10 @@ class Calendar extends Component {
                   <Day {...currentMonth} dayOfMonth={dayOfMonth} key={uuid()} />
                 );
               })}
-            </div>
+            </InnerCalendarContainer>
           ))}
         </CalendarContainer>
+        {this.props.showShifts && <Shifts />}
       </PageLayout>
     );
   }
@@ -67,6 +72,7 @@ class Calendar extends Component {
 function mapStateToProps(state) {
   return {
     pending: state.pending,
+    showShifts: state.shiftsToggle.showShifts,
   };
 }
 
