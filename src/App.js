@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { graphql, gql, compose } from 'react-apollo';
 import styled, { injectGlobal } from 'styled-components';
 
 import Calendar from './components/Calendar';
@@ -32,16 +33,32 @@ const AppContainer = styled.div`
 
 class App extends Component {
   render() {
+    console.log('users', this.props.data);
     return (
       <Router>
         <AppContainer>
-          <Nav showShifts={this.props.showShifts} />
-          <Route exact path="/" component={Calendar} />
-          {/*<Route path="/"> */}
+          <Nav
+            showShifts={this.props.showShifts}
+            users={this.props.data.users}
+          />
+          <Route
+            exact
+            path="/"
+            render={() => <Calendar users={this.props.data.users} />}
+          />
         </AppContainer>
       </Router>
     );
   }
 }
+const userQuery = gql`
+  query UserQuery {
+    users {
+      id
+      firstname
+      surname
+    }
+  }
+`;
 
-export default connect(null, { showShifts })(App);
+export default compose(graphql(userQuery), connect(null, { showShifts }))(App);

@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
+import { ApolloClient, ApolloProvider } from 'react-apollo';
+import { typeDefs } from './schema/schema';
+//Test setup till backend operational
+import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
 
 import App from './App';
 import reducer from './reducers/';
@@ -39,9 +44,19 @@ const defaultState = {
 };
 const store = createStore(reducer, defaultState, devToolsEnhancer());
 
+const schema = makeExecutableSchema({ typeDefs });
+addMockFunctionsToSchema({ schema });
+
+const mockNetworkInterface = mockNetworkInterfaceWithSchema({ schema });
+const client = new ApolloClient({
+  networkInterface: mockNetworkInterface,
+});
+
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ApolloProvider>,
   document.getElementById('root')
 );

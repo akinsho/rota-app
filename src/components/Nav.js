@@ -19,10 +19,11 @@ const Toggle = styled.button`
   box-shadow: 0 1px 1px grey;
 `;
 
-const Nav = ({ showShifts }) => {
+const Nav = ({ showShifts, users }) => {
   return (
     <NavBar>
       <Toggle onClick={showShifts}>Show My Shifts</Toggle>
+      {users && <span>Welcome {users[0].firstname}</span>}
     </NavBar>
   );
 };
@@ -30,6 +31,7 @@ Nav.defaultProps = {};
 
 Nav.propTypes = {
   showShifts: PropTypes.func,
+  users: PropTypes.array,
 };
 
 export default Nav;
