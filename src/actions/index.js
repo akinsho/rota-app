@@ -1,8 +1,7 @@
 import { ADD_SHIFT } from './../constants';
-export function addShift(day, shift) {
+export function addShift(shift) {
   return {
     type: ADD_SHIFT,
-    day,
     shift,
   };
 }

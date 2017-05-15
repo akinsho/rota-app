@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { injectGlobal } from 'styled-components';
+import styled, { injectGlobal } from 'styled-components';
 
-import reducer from './reducers/';
 import Calendar from './components/Calendar';
+import Shifts from './components/Shifts';
 
 //eslint-disable-next-line
 injectGlobal`
@@ -20,25 +18,22 @@ injectGlobal`
   }
 `;
 
-const defaultState = {
-  pending: {
-    may: {
-      shifts: ['A&E'],
-    },
-    february: {
-      shifts: ['T&O'],
-    },
-  },
-};
-
-const store = createStore(reducer, defaultState);
+const AppContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+`;
 
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
+      <AppContainer>
         <Calendar />
-      </Provider>
+        <Shifts />
+      </AppContainer>
     );
   }
 }

@@ -49,7 +49,7 @@ const weeksInAMonth = [0, 1, 2, 3, 4];
 
 class Calendar extends Component {
   render() {
-    console.log('pending', this.props.shifts[month.toLowerCase()]);
+    console.log('pending', this.props);
     return (
       <PageLayout>
         <Title>{month}</Title>
@@ -74,7 +74,6 @@ class Calendar extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state', state);
   return {
     shifts: state.pending,
   };

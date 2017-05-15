@@ -5,8 +5,9 @@ export default function(state = {}, action) {
     case actions.ADD_SHIFT:
       return {
         ...state,
-        [action.month]: {
-          shifts: [...state[action.month].shifts, action.shift],
+        currentMonth: {
+          ...state.staff,
+          shifts: [...state.currentMonth.shifts, action.shift],
         },
       };
     default:
