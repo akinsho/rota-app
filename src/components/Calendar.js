@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import styled from 'styled-components';
 
-import { daysInCurrentMonth, month } from './../lib/date_helpers';
+import { month } from './../lib/date_helpers';
+import Day from './Day';
 
 const PageLayout = styled.div`
   width: 100%;
@@ -32,14 +33,6 @@ const WeekDay = styled.div`
   background-color: skyBlue;
 `;
 
-const Day = styled.div`
-  display: grid;
-  grid-area: days
-  border: 1px solid skyBlue;
-  width:100%;
-  height:100%;
-`;
-
 const Title = styled.h1`
   color: skyblue;
   text-align: center;
@@ -49,7 +42,7 @@ const weeksInAMonth = [0, 1, 2, 3, 4];
 
 class Calendar extends Component {
   render() {
-    console.log('pending', this.props);
+    const { currentMonth } = this.props.pending;
     return (
       <PageLayout>
         <Title>{month}</Title>
@@ -60,9 +53,7 @@ class Calendar extends Component {
               {weeksInAMonth.map((week, weekIndex) => {
                 let dayOfMonth = dayIndex + 1 + weekIndex * 7;
                 return (
-                  <Day key={uuid()}>
-                    {dayOfMonth > daysInCurrentMonth ? null : dayOfMonth}
-                  </Day>
+                  <Day {...currentMonth} dayOfMonth={dayOfMonth} key={uuid()} />
                 );
               })}
             </div>
@@ -75,7 +66,7 @@ class Calendar extends Component {
 
 function mapStateToProps(state) {
   return {
-    shifts: state.pending,
+    pending: state.pending,
   };
 }
 
