@@ -1,3 +1,5 @@
+import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+
 export const typeDefs = `
   type User {
     id: ID!
@@ -9,3 +11,6 @@ export const typeDefs = `
     users: [User]
   }
 `;
+
+const schema = makeExecutableSchema({ typeDefs });
+export { schema };
