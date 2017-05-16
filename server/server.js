@@ -1,8 +1,8 @@
 import express from 'express';
+import cors from 'cors';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-
 import bodyParser from 'body-parser';
-import { schema } from './schema/schema';
+import { schema } from './src/schema';
 
 const app = express();
 const PORT = process.env.PORT || 3005;
@@ -12,6 +12,8 @@ const PORT = process.env.PORT || 3005;
 //   const result = await graphql(Schema, query, { db: request.db }, variables);
 //   return res(result);
 // }
+
+app.use('*', cors({ origin: 'http://localhost:3000' }));
 
 app.use(
   '/graphql',

@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
-import { ApolloClient, ApolloProvider } from 'react-apollo';
-import { typeDefs } from './schema/schema';
-//Test setup till backend operational
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
-import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
+import {
+  ApolloClient,
+  ApolloProvider,
+  createNetworkInterface,
+} from 'react-apollo';
 
 import App from './App';
 import reducer from './reducers/';
@@ -44,12 +44,12 @@ const defaultState = {
 };
 const store = createStore(reducer, defaultState, devToolsEnhancer());
 
-const schema = makeExecutableSchema({ typeDefs });
-addMockFunctionsToSchema({ schema });
+const networkInterface = createNetworkInterface({
+  uri: 'http://localhost:3005/graphql',
+});
 
-const mockNetworkInterface = mockNetworkInterfaceWithSchema({ schema });
 const client = new ApolloClient({
-  networkInterface: mockNetworkInterface,
+  networkInterface,
 });
 
 ReactDOM.render(
