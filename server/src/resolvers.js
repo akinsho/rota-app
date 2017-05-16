@@ -5,6 +5,7 @@ const users = [
     surname: 'Example',
   },
   {
+    id: 2,
     firstname: 'John',
     surname: 'Example',
   },
