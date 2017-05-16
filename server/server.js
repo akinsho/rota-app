@@ -7,11 +7,11 @@ import { schema } from './src/schema';
 const app = express();
 const PORT = process.env.PORT || 3005;
 
-// async function graphQLHandler(req, res) {
-//   const { query, variables = {} } = req.payload;
-//   const result = await graphql(Schema, query, { db: request.db }, variables);
-//   return res(result);
-// }
+async function graphQLHandler(req, res) {
+  const { query, variables = {} } = req.payload;
+  const result = await graphql(schema, query, { db: request.db }, variables);
+  return res(result);
+}
 
 app.use('*', cors({ origin: 'http://localhost:3000' }));
 

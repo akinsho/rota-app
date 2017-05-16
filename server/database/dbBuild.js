@@ -1,7 +1,6 @@
 const QueryFile = require('pg-promise').QueryFile;
 const path = require('path');
-const { db } = require('./db_build.js');
-
+const { db } = require('./dbConnection');
 
 //TODO this will need to be refactored for Heroku or wherever else
 const sql = file => {
