@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
 import {
@@ -52,12 +52,11 @@ const networkInterface = createNetworkInterface({
 const client = new ApolloClient({
   networkInterface,
 });
-const apollo = client.reducer();
 
 const rootReducer = combineReducers({
   pending: shifts,
   shiftsToggle,
-  apollo,
+  apollo: client.reducer(),
 });
 const store = createStore(
   rootReducer,

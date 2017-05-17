@@ -6,6 +6,7 @@ import styled, { injectGlobal } from 'styled-components';
 
 import Calendar from './components/Calendar';
 import Nav from './components/Nav';
+import WeeksShifts from './components/WeeksShifts';
 import { showShifts } from './actions';
 
 //eslint-disable-next-line
@@ -25,7 +26,7 @@ injectGlobal`
 
 const AppContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction:column;
   justify-content: center;
@@ -35,17 +36,15 @@ const AppContainer = styled.div`
 class App extends Component {
   render() {
     console.log('users', this.props.data);
+    const { users } = this.props.data;
     return (
       <Router>
         <AppContainer>
-          <Nav
-            showShifts={this.props.showShifts}
-            users={this.props.data.users}
-          />
+          <Nav showShifts={this.props.showShifts} users={users} />
+          <Route exact path="/" render={() => <Calendar users={users} />} />
           <Route
-            exact
-            path="/"
-            render={() => <Calendar users={this.props.data.users} />}
+            path="/weeks-rota"
+            render={() => <WeeksShifts users={users} />}
           />
         </AppContainer>
       </Router>

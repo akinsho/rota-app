@@ -13,4 +13,6 @@ const getDaysInMonth = (month, year) => {
   // return new Date(year, month+1, 0).getDate();
 };
 
+export const daysOfWeek = ['mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun'];
+export const weeksInAMonth = [0, 1, 2, 3, 4];
 export const daysInCurrentMonth = getDaysInMonth(currentMonth, currentYear);

@@ -7,6 +7,7 @@ export const resolvers = {
     users: () => {
       return db.query(`SELECT * FROM users`).then(res => res).catch(err => err);
     },
+    // shifts: () => return db.query(`SELECT * FROM shifts WHERE `)
   },
   Mutation: {
     addUser: (root, args) => {

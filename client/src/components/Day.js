@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { StyledLink } from './styled';
+
 import uuid from 'uuid/v4';
 import { daysInCurrentMonth } from './../lib/date_helpers';
 
@@ -19,10 +21,12 @@ const Day = ({ dayOfMonth, time, assigned, shifts }) => {
       {shifts.map(shift => {
         if (shift.date === dayOfMonth) {
           return (
-            <div key={uuid()}>
-              <p>{shift.time}</p>
-              <p>{shift.assigned}</p>
-            </div>
+            <StyledLink key={uuid()} to="/weeks-rota">
+              <div>
+                <p>{shift.time}</p>
+                <p>{shift.assigned}</p>
+              </div>
+            </StyledLink>
           );
         }
         return null;

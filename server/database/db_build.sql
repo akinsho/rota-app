@@ -14,7 +14,7 @@ CREATE TABLE shifts (
   speciality varchar(100),
   day integer NOT NULL,
   time varchar(100) NOT NULL,
-  assigned varchar(100) NOT NULL
+  foreign key(assigned) REFERENCES users(id)
 );
 
 INSERT INTO users(firstname, surname, grade) VALUES 
@@ -22,7 +22,7 @@ INSERT INTO users(firstname, surname, grade) VALUES
 ('John', 'Example', 'SHO');
 
 INSERT INTO shifts(speciality, day, time, assigned) VALUES 
-('A&E', '18', '1000-2200', 'Sharon Example'),
-('A&E', '05', '11-2100', 'John Example');
+('A&E', '18', '1000-2200', '1'),
+('A&E', '05', '11-2100', '2');
 
 COMMIT;
