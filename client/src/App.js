@@ -19,6 +19,7 @@ injectGlobal`
   }
   * {
    box-sizing: inherit
+   font-family: 'Helvetica', sans-serif;
   }
 `;
 
