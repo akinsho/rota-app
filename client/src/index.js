@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
 import {
   ApolloClient,
   ApolloProvider,
   createNetworkInterface,
 } from 'react-apollo';
+import shifts from './reducers/shiftsReducer';
+import shiftsToggle from './reducers/configReducer';
 
 import App from './App';
-import reducer from './reducers/';
+// import reducer from './reducers/';
 
 const defaultState = {
   shiftsToggle: false,
@@ -42,7 +44,6 @@ const defaultState = {
     },
   },
 };
-const store = createStore(reducer, defaultState, devToolsEnhancer());
 
 const networkInterface = createNetworkInterface({
   uri: 'http://localhost:3005/graphql',
@@ -51,12 +52,23 @@ const networkInterface = createNetworkInterface({
 const client = new ApolloClient({
   networkInterface,
 });
+const apollo = client.reducer();
+
+const rootReducer = combineReducers({
+  pending: shifts,
+  shiftsToggle,
+  apollo,
+});
+const store = createStore(
+  rootReducer,
+  defaultState,
+  devToolsEnhancer(),
+  compose(applyMiddleware(client.middleware()))
+);
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <Provider store={store}>
-      <App />
-    </Provider>
+  <ApolloProvider store={store} client={client}>
+    <App />
   </ApolloProvider>,
   document.getElementById('root')
 );
