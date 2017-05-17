@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import uuid from 'uuid/v4';
-//TODO this variable is undefined
 import { daysInCurrentMonth } from './../lib/date_helpers';
 
 const DayContainer = styled.div`
@@ -26,6 +25,7 @@ const Day = ({ dayOfMonth, time, assigned, shifts }) => {
             </div>
           );
         }
+        return null;
       })}
     </DayContainer>
   );
