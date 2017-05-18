@@ -7,9 +7,17 @@ export const typeDefs = `
     firstname: String!
     surname: String!
   }
+  type Shifts {
+    id: ID!
+    speciality: String!
+    day: Int!
+    time: String!
+    assigned: Int!
+  }
 
   type Query {
     users: [User]
+    shifts: [Shifts]
   }
 
 type Mutation {

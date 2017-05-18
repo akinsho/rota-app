@@ -10,16 +10,24 @@ const NavBar = styled.header`
   padding: 1rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
 `;
 
+const CompanyLogo = styled.h1`
+  margin: 0;
+`;
+
 const Nav = ({ showShifts, users }) => {
   return (
     <NavBar>
-      <Button onClick={showShifts}>Show My Shifts</Button>
-      <Button><StyledLink to="/">Home</StyledLink></Button>
+      <div>
+        <Button onClick={showShifts}>Show My Shifts</Button>
+        <Button><StyledLink to="/">Home</StyledLink></Button>
+      </div>
+      <CompanyLogo>Rota App</CompanyLogo>
       {users && <span>Welcome {users[0].firstname}</span>}
     </NavBar>
   );

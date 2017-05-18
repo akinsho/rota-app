@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { graphql, gql, compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import styled, { injectGlobal } from 'styled-components';
 
 import Calendar from './components/Calendar';
 import Nav from './components/Nav';
 import WeeksShifts from './components/WeeksShifts';
 import { showShifts } from './actions';
+import { userQuery } from './components/Queries';
 
 //eslint-disable-next-line
 injectGlobal`
@@ -26,11 +27,12 @@ injectGlobal`
 
 const AppContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction:column;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 `;
 
 class App extends Component {
@@ -51,14 +53,5 @@ class App extends Component {
     );
   }
 }
-const userQuery = gql`
-  query UserQuery {
-    users {
-      id
-      firstname
-      surname
-    }
-  }
-`;
 
 export default compose(graphql(userQuery), connect(null, { showShifts }))(App);

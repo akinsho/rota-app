@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Provider } from 'react-redux';
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
 import {
@@ -12,6 +11,7 @@ import shifts from './reducers/shiftsReducer';
 import shiftsToggle from './reducers/configReducer';
 
 import App from './App';
+// import { Provider } from 'react-redux';
 // import reducer from './reducers/';
 
 const defaultState = {

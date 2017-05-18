@@ -7,6 +7,7 @@ import uuid from 'uuid';
 
 const WeekGrid = styled.div`
   display: flex;
+  box-shadow: 0 1px 1px grey;
 `;
 
 const WeekContainer = styled.div`
@@ -15,7 +16,8 @@ const WeekContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: space-between;
+  align-items: center;
+  margin-top: 2rem;
 `;
 
 const WeekDay = styled.div`
@@ -25,7 +27,15 @@ const WeekDay = styled.div`
   width: 8rem;
   border: 0.4px solid black;
   text-align: center;
-  padding: 0.5rem;
+  padding: 0;
+  background-color: whitesmoke;
+`;
+
+const WeekDayTitle = styled.h2`
+  height: 2rem;
+  border-bottom: 0.5px solid black;
+  background-color: skyblue;
+  margin: 0;
 `;
 
 const Shift = styled.div`
@@ -37,7 +47,7 @@ const WeeksShifts = ({ users }) => (
     <WeekGrid>
       {daysOfWeek.map(weekday => (
         <WeekDay key={uuid()}>
-          {weekday}
+          <WeekDayTitle>{weekday}</WeekDayTitle>
           {/*<p>{users.map(user => user.)}</p>*/}
         </WeekDay>
       ))}

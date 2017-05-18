@@ -14,7 +14,8 @@ const DayContainer = styled.div`
   height:100%;
 `;
 
-const Day = ({ dayOfMonth, time, assigned, shifts }) => {
+const Day = ({ dayOfMonth, time, assigned, shifts, apollo }) => {
+  console.log('props', apollo);
   return (
     <DayContainer>
       {dayOfMonth > Number(daysInCurrentMonth) ? null : dayOfMonth}

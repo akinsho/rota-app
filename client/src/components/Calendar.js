@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import styled from 'styled-components';
-
+import { compose, graphql } from 'react-apollo';
 import { month, daysOfWeek, weeksInAMonth } from './../lib/date_helpers';
 import Day from './Day';
 import Shifts from './Shifts';
 import { PageLayout } from './styled';
+import { userQuery } from './Queries';
 
 const CalendarContainer = styled.div`
    display: grid;
@@ -38,6 +39,7 @@ const Title = styled.h1`
 class Calendar extends Component {
   render() {
     const { currentMonth } = this.props.pending;
+    const { shifts } = this.props.data;
     return (
       <PageLayout>
         <Title>{month}</Title>
@@ -48,7 +50,12 @@ class Calendar extends Component {
               {weeksInAMonth.map((week, weekIndex) => {
                 let dayOfMonth = dayIndex + 1 + weekIndex * 7;
                 return (
-                  <Day {...currentMonth} dayOfMonth={dayOfMonth} key={uuid()} />
+                  <Day
+                    {...currentMonth}
+                    apollo={shifts}
+                    dayOfMonth={dayOfMonth}
+                    key={uuid()}
+                  />
                 );
               })}
             </InnerCalendarContainer>
@@ -67,4 +74,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Calendar);
+export default compose(graphql(userQuery), connect(mapStateToProps))(Calendar);
