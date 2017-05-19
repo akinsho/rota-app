@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import styled from 'styled-components';
 import { compose, graphql } from 'react-apollo';
-import { month, daysOfWeek, weeksInAMonth } from './../lib/date_helpers';
+import { month, daysOfWeek, weeksInAMonth } from './../lib/DateHelpers';
 import Day from './Day';
 import Shifts from './Shifts';
 import { PageLayout } from './styled';
@@ -39,7 +39,7 @@ const Title = styled.h1`
 class Calendar extends Component {
   render() {
     const { currentMonth } = this.props.pending;
-    const { shifts } = this.props.data;
+    const { data } = this.props;
     return (
       <PageLayout>
         <Title>{month}</Title>
@@ -51,8 +51,8 @@ class Calendar extends Component {
                 let dayOfMonth = dayIndex + 1 + weekIndex * 7;
                 return (
                   <Day
-                    {...currentMonth}
-                    apollo={shifts}
+                    month={currentMonth.month}
+                    shifts={data.shifts}
                     dayOfMonth={dayOfMonth}
                     key={uuid()}
                   />

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // import { PageLayout } from './styled';
-import { daysOfWeek } from './../lib/date_helpers';
+import { daysOfWeek } from './../lib/DateHelpers';
 import uuid from 'uuid';
 
 const WeekGrid = styled.div`
