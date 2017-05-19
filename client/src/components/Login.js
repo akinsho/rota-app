@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 //import cuid from 'cuid';
+import { logIn } from './../actions/index';
 import { graphql, compose } from 'react-apollo';
 import { AddUserMutation } from './Mutations';
-import { UserQuery } from './Queries.js';
-
+import { userQuery } from './Queries.js';
 import { PageLayout, Button } from './styled';
 
 const Form = styled.form`
@@ -31,15 +31,26 @@ const LoginPage = styled(PageLayout)`
   height: 100vh;
 `;
 
-console.log('userQuery', UserQuery);
+const ReturningUser = styled(Button)`
+  width: 60%;
+  background-color: palevioletred;
+  height: 4rem;
+`;
+
 class Login extends Component {
   state = {
-    username: '',
-    firstname: '',
-    surname: '',
-    grade: '',
-    password: '',
+    fields: {
+      username: '',
+      firstname: '',
+      surname: '',
+      grade: '',
+      password: '',
+    },
+    returning: false,
   };
+
+  handleReturningUser = () =>
+    this.setState({ returning: !this.state.returning });
 
   handleSubmit = e => {
     e.preventDefault();
@@ -50,31 +61,41 @@ class Login extends Component {
         surname,
         grade,
       },
-      refetchQueries: [{ query: UserQuery }],
+      refetchQueries: [{ query: userQuery }],
     });
     this.props.history.push('/calendar');
+    this.props.logIn();
   };
 
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      fields: {
+        ...this.state.fields,
+        [e.target.name]: e.target.value,
+      },
+    });
   };
 
   render() {
     /*TODO cuid and uuid not working on this input so reliant on index....*/
     return (
       <LoginPage>
+        <ReturningUser onClick={this.handleReturningUser}>
+          If you are already registered click here to login
+        </ReturningUser>
         <Form onSubmit={this.handleSubmit}>
-          {Object.keys(this.state).map((field, index) => (
-            <Input
-              type="text"
-              required
-              name={field}
-              placeholder={field}
-              value={this.state[field]}
-              key={index}
-              onChange={this.handleChange}
-            />
-          ))}
+          {!this.state.returning &&
+            Object.keys(this.state.fields).map((field, index) => (
+              <Input
+                type="text"
+                required
+                name={field}
+                placeholder={field}
+                value={this.state.fields[field]}
+                key={index}
+                onChange={this.handleChange}
+              />
+            ))}
           <Button>Submit</Button>
         </Form>
       </LoginPage>
@@ -83,9 +104,12 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    loggedIn: state.loggedIn,
+  };
 }
 
-export default compose(graphql(AddUserMutation), connect(mapStateToProps))(
-  withRouter(Login)
-);
+export default compose(
+  graphql(AddUserMutation),
+  connect(mapStateToProps, { logIn })
+)(withRouter(Login));

@@ -70,8 +70,11 @@ class Calendar extends Component {
 function mapStateToProps(state) {
   return {
     pending: state.pending,
-    showShifts: state.shiftsToggle.showShifts,
+    showShifts: state.session.shiftsToggle,
   };
 }
 
-export default compose(graphql(userQuery, { options: {pollInterval: 5000} }), connect(mapStateToProps))(Calendar);
+export default compose(
+  graphql(userQuery, { options: { pollInterval: 5000 } }),
+  connect(mapStateToProps)
+)(Calendar);

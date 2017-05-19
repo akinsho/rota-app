@@ -1,11 +1,19 @@
-import { TOGGLE_SHIFTS } from './../constants';
+import { TOGGLE_SHIFTS, LOG_IN } from './../constants';
 
-export default function(state = { showShifts: false }, action) {
+export function sessionState(
+  state = { loggedIn: false, showShifts: false },
+  action
+) {
   switch (action.type) {
     case TOGGLE_SHIFTS:
       return {
         ...state,
-        showShifts: !state.showShifts,
+        shiftsToggle: !state.shiftsToggle,
+      };
+    case LOG_IN:
+      return {
+        ...state,
+        loggedIn: !state.loggedIn,
       };
     default:
       return state;
