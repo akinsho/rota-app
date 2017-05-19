@@ -25,7 +25,7 @@ const Day = ({ dayOfMonth, shifts, month }) => {
               <StyledLink key={uuid()} to="/weeks-rota">
                 <div>
                   <p>{shift.time}</p>
-                  <p>{shift.assigned}</p>
+                  <p>Dr. {shift.firstname + ' ' + shift.surname}</p>
                 </div>
               </StyledLink>
             );
@@ -36,7 +36,6 @@ const Day = ({ dayOfMonth, shifts, month }) => {
   );
 };
 
-Day.defaultProps = {};
 
 Day.propTypes = {
   shifts: PropTypes.array,

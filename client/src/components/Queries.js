@@ -9,6 +9,8 @@ export const userQuery = gql`
     }
     shifts {
       id
+      firstname
+      surname
       assigned
       time
       day

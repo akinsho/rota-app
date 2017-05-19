@@ -9,6 +9,8 @@ export const typeDefs = `
   }
   type Shifts {
     id: ID!
+    firstname: String!
+    surname: String!
     speciality: String!
     day: Int!
     time: String!

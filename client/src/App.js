@@ -37,7 +37,7 @@ const AppContainer = styled.div`
 
 class App extends Component {
   render() {
-    console.log('users', this.props.data);
+    //console.log('databaseInfo', this.props.data);
     const { users } = this.props.data;
     return (
       <Router>
