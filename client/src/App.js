@@ -7,6 +7,7 @@ import styled, { injectGlobal } from 'styled-components';
 import Calendar from './components/Calendar';
 import Nav from './components/Nav';
 import WeeksShifts from './components/WeeksShifts';
+import Login from './components/Login';
 import { showShifts } from './actions';
 import { userQuery } from './components/Queries';
 
@@ -43,7 +44,8 @@ class App extends Component {
       <Router>
         <AppContainer>
           <Nav showShifts={this.props.showShifts} users={users} />
-          <Route exact path="/" render={() => <Calendar users={users} />} />
+          <Route exact path="/" component={Login}/>
+          <Route path="/calendar" render={() => <Calendar users={users} />} />
           <Route
             path="/weeks-rota"
             render={() => <WeeksShifts users={users} />}

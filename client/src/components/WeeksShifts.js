@@ -38,9 +38,9 @@ const WeekDayTitle = styled.h2`
   margin: 0;
 `;
 
-const Shift = styled.div`
-  width: 100%;
-`;
+//const Shift = styled.div`
+  //width: 100%;
+//`;
 
 const WeeksShifts = ({ users }) => (
   <WeekContainer>

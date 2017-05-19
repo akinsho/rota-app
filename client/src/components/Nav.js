@@ -26,6 +26,7 @@ const Nav = ({ showShifts, users }) => {
       <div>
         <Button onClick={showShifts}>Show My Shifts</Button>
         <Button><StyledLink to="/">Home</StyledLink></Button>
+        <Button><StyledLink to="/calendar">Calendar</StyledLink></Button>
       </div>
       <CompanyLogo>Rota App</CompanyLogo>
       {users && <span>Welcome {users[0].firstname}</span>}

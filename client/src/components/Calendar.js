@@ -74,4 +74,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default compose(graphql(userQuery), connect(mapStateToProps))(Calendar);
+export default compose(graphql(userQuery, { options: {pollInterval: 5000} }), connect(mapStateToProps))(Calendar);

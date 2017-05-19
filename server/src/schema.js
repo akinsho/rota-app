@@ -6,6 +6,7 @@ export const typeDefs = `
     id: ID!
     firstname: String!
     surname: String!
+    grade: String!
   }
   type Shifts {
     id: ID!
@@ -24,7 +25,7 @@ export const typeDefs = `
 
 type Mutation {
   # A mutation to add a user
-  addUser(firstname: String!, surname: String!): User
+  addUser(firstname: String!, surname: String!, grade: String!): User
 }
 `;
 
