@@ -7,26 +7,9 @@ import { logIn } from './../actions/index';
 import { graphql, compose } from 'react-apollo';
 import { AddUserMutation } from './Mutations';
 import { userQuery } from './Queries.js';
-import { PageLayout, Button } from './styled';
+import LoginForm from './LoginForm';
+import { PageLayout, Button, Form } from './styled';
 
-const Form = styled.form`
-  background-color: grey;
-  width: 60%;
-  height: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-`;
-
-const Input = styled.input`
-  border: none;
-  width: 80%;
-  margin: 1rem 0;
-  height: 2rem;
-  padding-left: 1rem;
-`;
 const LoginPage = styled(PageLayout)`
   height: 100vh;
 `;
@@ -40,10 +23,10 @@ const ReturningUser = styled(Button)`
 class Login extends Component {
   state = {
     fields: {
-      username: '',
       firstname: '',
       surname: '',
       grade: '',
+      username: '',
       password: '',
     },
     returning: false,
@@ -54,7 +37,7 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { firstname, surname, grade } = this.state;
+    const { firstname, surname, grade } = this.state.fields;
     this.props.mutate({
       variables: {
         firstname,
@@ -78,24 +61,21 @@ class Login extends Component {
 
   render() {
     /*TODO cuid and uuid not working on this input so reliant on index....*/
+    const fields = Object.keys(this.state.fields);
     return (
       <LoginPage>
         <ReturningUser onClick={this.handleReturningUser}>
-          If you are already registered click here to login
+          {!this.state.returning
+            ? 'If you are already registered click here to login'
+            : 'Click here to register'}
         </ReturningUser>
         <Form onSubmit={this.handleSubmit}>
-          {!this.state.returning &&
-            Object.keys(this.state.fields).map((field, index) => (
-              <Input
-                type="text"
-                required
-                name={field}
-                placeholder={field}
-                value={this.state.fields[field]}
-                key={index}
-                onChange={this.handleChange}
-              />
-            ))}
+          {!this.state.returning
+            ? <LoginForm fields={fields} handleChange={this.handleChange} />
+            : <LoginForm
+                fields={fields.slice(-2)}
+                handleChange={this.handleChange}
+              />}
           <Button>Submit</Button>
         </Form>
       </LoginPage>

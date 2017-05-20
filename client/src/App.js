@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { graphql, compose } from 'react-apollo';
 import styled, { injectGlobal } from 'styled-components';
+import PrivateRoute from './components/PrivateRoute';
 
 import Calendar from './components/Calendar';
 import Nav from './components/Nav';
@@ -44,10 +45,15 @@ class App extends Component {
       <Router>
         <AppContainer>
           <Nav showShifts={this.props.showShifts} users={users} />
-          <Route exact path="/" component={Login}/>
-          <Route path="/calendar" render={() => <Calendar users={users} />} />
-          <Route
+          <Route exact path="/" component={Login} />
+          <PrivateRoute
+            loggedIn={this.props.loggedIn}
+            path="/calendar"
+            render={() => <Calendar users={users} />}
+          />
+          <PrivateRoute
             path="/weeks-rota"
+            loggedIn={this.props.loggedIn}
             render={() => <WeeksShifts users={users} />}
           />
         </AppContainer>
@@ -56,4 +62,13 @@ class App extends Component {
   }
 }
 
-export default compose(graphql(userQuery), connect(null, { showShifts }))(App);
+const mapStateToProps = state => {
+  return {
+    session: state.session,
+  };
+};
+
+export default compose(
+  graphql(userQuery),
+  connect(mapStateToProps, { showShifts })
+)(App);
