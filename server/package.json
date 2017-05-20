@@ -2,7 +2,7 @@
   "scripts": {
     "start": "nodemon ./server.js --exec babel-node -e js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-db": "node ./database/db_build.js"
+    "build-db": "node ./database/dbBuild.js"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",

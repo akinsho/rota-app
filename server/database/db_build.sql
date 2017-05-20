@@ -3,18 +3,18 @@ BEGIN;
 DROP TABLE IF EXISTS users, shifts CASCADE;
 
 CREATE TABLE users (
-  id serial PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   firstname varchar(100) NOT NULL,
   surname    varchar(100) NOT NULL,
   grade     varchar(100) NOT NULL
 );
 
 CREATE TABLE shifts (
-  id serial PRIMARY KEY,
-  speciality varchar(100),
-  day integer NOT NULL,
-  time varchar(100) NOT NULL,
-  assigned varchar(100) NOT NULL
+  id SERIAL PRIMARY KEY,
+  speciality VARCHAR(100),
+  day INTEGER NOT NULL,
+  time VARCHAR(100) NOT NULL,
+  assigned INTEGER REFERENCES users(id)
 );
 
 INSERT INTO users(firstname, surname, grade) VALUES 
@@ -22,7 +22,7 @@ INSERT INTO users(firstname, surname, grade) VALUES
 ('John', 'Example', 'SHO');
 
 INSERT INTO shifts(speciality, day, time, assigned) VALUES 
-('A&E', '18', '1000-2200', 'Sharon Example'),
-('A&E', '05', '11-2100', 'John Example');
+('A&E', '18', '1000-2200', '1'),
+('A&E', '05', '11-2100', '2');
 
 COMMIT;

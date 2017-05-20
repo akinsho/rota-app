@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { graphql, gql, compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import styled, { injectGlobal } from 'styled-components';
+import PrivateRoute from './components/PrivateRoute';
 
 import Calendar from './components/Calendar';
 import Nav from './components/Nav';
+import WeeksShifts from './components/WeeksShifts';
+import Login from './components/Login';
 import { showShifts } from './actions';
+import { userQuery } from './components/Queries';
 
 //eslint-disable-next-line
 injectGlobal`
@@ -30,36 +34,41 @@ const AppContainer = styled.div`
   flex-direction:column;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 `;
 
 class App extends Component {
   render() {
-    console.log('users', this.props.data);
+    //console.log('databaseInfo', this.props.data);
+    const { users } = this.props.data;
     return (
       <Router>
         <AppContainer>
-          <Nav
-            showShifts={this.props.showShifts}
-            users={this.props.data.users}
+          <Nav showShifts={this.props.showShifts} users={users} />
+          <Route exact path="/" component={Login} />
+          <PrivateRoute
+            loggedIn={this.props.loggedIn}
+            path="/calendar"
+            render={() => <Calendar users={users} />}
           />
-          <Route
-            exact
-            path="/"
-            render={() => <Calendar users={this.props.data.users} />}
+          <PrivateRoute
+            path="/weeks-rota"
+            loggedIn={this.props.loggedIn}
+            render={() => <WeeksShifts users={users} />}
           />
         </AppContainer>
       </Router>
     );
   }
 }
-const userQuery = gql`
-  query UserQuery {
-    users {
-      id
-      firstname
-      surname
-    }
-  }
-`;
 
-export default compose(graphql(userQuery), connect(null, { showShifts }))(App);
+const mapStateToProps = state => {
+  return {
+    session: state.session,
+  };
+};
+
+export default compose(
+  graphql(userQuery),
+  connect(mapStateToProps, { showShifts })
+)(App);

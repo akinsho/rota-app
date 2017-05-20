@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { StyledLink } from './styled';
+
 import uuid from 'uuid/v4';
-//TODO this variable is undefined
-import { daysInCurrentMonth } from './../lib/date_helpers';
+import { daysInCurrentMonth } from './../lib/DateHelpers';
 
 const DayContainer = styled.div`
   display: grid;
@@ -13,31 +14,33 @@ const DayContainer = styled.div`
   height:100%;
 `;
 
-const Day = ({ dayOfMonth, time, assigned, shifts }) => {
+const Day = ({ dayOfMonth, shifts, month }) => {
   return (
     <DayContainer>
       {dayOfMonth > Number(daysInCurrentMonth) ? null : dayOfMonth}
-      {shifts.map(shift => {
-        if (shift.date === dayOfMonth) {
-          return (
-            <div key={uuid()}>
-              <p>{shift.time}</p>
-              <p>{shift.assigned}</p>
-            </div>
-          );
-        }
-      })}
+      {shifts &&
+        shifts.map(shift => {
+          if (shift.day === dayOfMonth) {
+            return (
+              <StyledLink key={uuid()} to="/weeks-rota">
+                <div>
+                  <p>{shift.time}</p>
+                  <p>Dr. {shift.firstname + ' ' + shift.surname}</p>
+                </div>
+              </StyledLink>
+            );
+          }
+          return null;
+        })}
     </DayContainer>
   );
 };
 
-Day.defaultProps = {};
 
 Day.propTypes = {
-  time: PropTypes.string,
-  assigned: PropTypes.string,
   shifts: PropTypes.array,
   dayOfMonth: PropTypes.number,
+  month: PropTypes.number,
 };
 
 export default Day;

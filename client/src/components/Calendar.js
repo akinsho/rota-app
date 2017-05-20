@@ -2,19 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import styled from 'styled-components';
-
-import { month } from './../lib/date_helpers';
+import { compose, graphql } from 'react-apollo';
+import { month, daysOfWeek, weeksInAMonth } from './../lib/DateHelpers';
 import Day from './Day';
 import Shifts from './Shifts';
+import { PageLayout } from './styled';
+import { userQuery } from './Queries';
 
-const PageLayout = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content:center;
-`;
 const CalendarContainer = styled.div`
    display: grid;
    grid-template-columns: repeat(7, 1fr);
@@ -41,12 +35,11 @@ const Title = styled.h1`
   color: skyblue;
   text-align: center;
 `;
-const daysOfWeek = ['mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun'];
-const weeksInAMonth = [0, 1, 2, 3, 4];
 
 class Calendar extends Component {
   render() {
     const { currentMonth } = this.props.pending;
+    const { data } = this.props;
     return (
       <PageLayout>
         <Title>{month}</Title>
@@ -57,7 +50,12 @@ class Calendar extends Component {
               {weeksInAMonth.map((week, weekIndex) => {
                 let dayOfMonth = dayIndex + 1 + weekIndex * 7;
                 return (
-                  <Day {...currentMonth} dayOfMonth={dayOfMonth} key={uuid()} />
+                  <Day
+                    month={currentMonth.month}
+                    shifts={data.shifts}
+                    dayOfMonth={dayOfMonth}
+                    key={uuid()}
+                  />
                 );
               })}
             </InnerCalendarContainer>
@@ -72,8 +70,11 @@ class Calendar extends Component {
 function mapStateToProps(state) {
   return {
     pending: state.pending,
-    showShifts: state.shiftsToggle.showShifts,
+    showShifts: state.session.shiftsToggle,
   };
 }
 
-export default connect(mapStateToProps)(Calendar);
+export default compose(
+  graphql(userQuery, { options: { pollInterval: 5000 } }),
+  connect(mapStateToProps)
+)(Calendar);
