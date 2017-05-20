@@ -1,3 +1,3 @@
 Rota-app
 ===
-React app scheduling and rota management app
+A Scheduling and rota management app for healthcare professionals
