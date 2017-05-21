@@ -28,10 +28,5 @@ PrivateRoute.propTypes = {
   component: PropTypes.func,
 };
 
-const mapStateToProps = state => {
-  return {
-    loggedIn: state.session.loggedIn,
-  };
-};
 
 export default PrivateRoute;
