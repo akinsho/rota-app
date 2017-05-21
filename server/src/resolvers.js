@@ -12,7 +12,6 @@ export const resolvers = {
   },
   Mutation: {
     addUser: (root, args) => {
-      console.log('args', args);
       return db
         .query(
           `INSERT INTO users(firstname, surname, grade) VALUES ($1, $2, $3);`,

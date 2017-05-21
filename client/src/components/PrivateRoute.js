@@ -11,7 +11,7 @@ const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => (
         ? <Component {...props} />
         : <Redirect
             to={{
-              pathname: '/',
+              pathname: '/calendar',
               state: { from: props.location },
             }}
           />}
@@ -20,6 +20,9 @@ const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => (
 
 PrivateRoute.defaultProps = {};
 
-PrivateRoute.propTypes = {};
+PrivateRoute.propTypes = {
+  loggedIn: PropTypes.bool,
+  component: PropTypes.object
+};
 
 export default PrivateRoute;

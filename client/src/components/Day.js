@@ -18,24 +18,18 @@ const Day = ({ dayOfMonth, shifts, month }) => {
   return (
     <DayContainer>
       {dayOfMonth > Number(daysInCurrentMonth) ? null : dayOfMonth}
-      {shifts &&
-        shifts.map(shift => {
-          if (shift.day === dayOfMonth) {
-            return (
-              <StyledLink key={uuid()} to="/weeks-rota">
-                <div>
-                  <p>{shift.time}</p>
-                  <p>Dr. {shift.firstname + ' ' + shift.surname}</p>
-                </div>
-              </StyledLink>
-            );
-          }
-          return null;
-        })}
+      {shifts && shifts.map( shift => shift.day === dayOfMonth
+              ? <StyledLink key={uuid()} to="/weeks-rota">
+                  <div>
+                    <p>{shift.time}</p>
+                    <p>Dr. {shift.firstname + ' ' + shift.surname}</p>
+                  </div>
+                </StyledLink>
+              : null
+        )}
     </DayContainer>
   );
 };
-
 
 Day.propTypes = {
   shifts: PropTypes.array,

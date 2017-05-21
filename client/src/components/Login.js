@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter /*Redirect*/ } from 'react-router-dom';
 //import cuid from 'cuid';
 import { logIn } from './../actions/index';
 import { graphql, compose } from 'react-apollo';
@@ -53,11 +53,13 @@ class Login extends Component {
   };
 
   findRegisteredUser = (firstname, surname) => {
+    //TODO currently fields being completed are firstname .., expected fields
+    //are password and surname
     const registeredUser = this.props.data.users.filter(user => {
       return user.firstname === firstname && user.surname === surname;
     });
     console.log('registeredUser', registeredUser);
-    registeredUser.length === 1 ? this.props.logIn() : null;
+    return registeredUser.length === 1 ? this.props.logIn() : null;
   };
 
   handleChange = e => {
@@ -70,8 +72,8 @@ class Login extends Component {
   };
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-    console.log('state', this.state);
+    //const { from } = this.props.location.state || { from: { pathname: '/' } };
+    //console.log('state', this.state);
     /*TODO cuid and uuid not working on this input so reliant on index....*/
     //if (this.props.loggedIn) {
     //return <Redirect to={from.pathname} />;
