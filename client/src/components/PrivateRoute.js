@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, loggedIn, ...rest }) => (
   <Route
-    {...rest}
+    { ...rest }
+    loggedIn={loggedIn}
     render={props =>
       props.LoggedIn
         ? <Component {...props} />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 //import cuid from 'cuid';
 import { logIn } from './../actions/index';
 import { graphql, compose } from 'react-apollo';
@@ -38,16 +38,26 @@ class Login extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { firstname, surname, grade } = this.state.fields;
-    this.props.mutate({
-      variables: {
-        firstname,
-        surname,
-        grade,
-      },
-      refetchQueries: [{ query: userQuery }],
-    });
-    this.props.history.push('/calendar');
+    !this.state.returning
+      ? this.props.mutate({
+          variables: {
+            firstname,
+            surname,
+            grade,
+          },
+          refetchQueries: [{ query: userQuery }],
+        })
+      : this.findRegisteredUser(firstname, surname);
+    //this.props.history.push('/calendar');
     this.props.logIn();
+  };
+
+  findRegisteredUser = (firstname, surname) => {
+    const registeredUser = this.props.data.users.filter(user => {
+      return user.firstname === firstname && user.surname === surname;
+    });
+    console.log('registeredUser', registeredUser);
+    registeredUser.length === 1 ? this.props.logIn() : null;
   };
 
   handleChange = e => {
@@ -60,7 +70,12 @@ class Login extends Component {
   };
 
   render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    console.log('state', this.state);
     /*TODO cuid and uuid not working on this input so reliant on index....*/
+    //if (this.props.loggedIn) {
+    //return <Redirect to={from.pathname} />;
+    //}
     const fields = Object.keys(this.state.fields);
     return (
       <LoginPage>
@@ -85,11 +100,12 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   return {
-    loggedIn: state.loggedIn,
+    loggedIn: state.session.loggedIn,
   };
 }
 
 export default compose(
   graphql(AddUserMutation),
+  graphql(userQuery),
   connect(mapStateToProps, { logIn })
 )(withRouter(Login));

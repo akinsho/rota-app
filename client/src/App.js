@@ -41,19 +41,20 @@ class App extends Component {
   render() {
     //console.log('databaseInfo', this.props.data);
     const { users } = this.props.data;
+    const { loggedIn } = this.props.session;
     return (
       <Router>
         <AppContainer>
           <Nav showShifts={this.props.showShifts} users={users} />
           <Route exact path="/" component={Login} />
           <PrivateRoute
-            loggedIn={this.props.loggedIn}
+            loggedIn={loggedIn}
             path="/calendar"
             render={() => <Calendar users={users} />}
           />
           <PrivateRoute
             path="/weeks-rota"
-            loggedIn={this.props.loggedIn}
+            loggedIn={loggedIn}
             render={() => <WeeksShifts users={users} />}
           />
         </AppContainer>
