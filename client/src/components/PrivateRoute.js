@@ -3,15 +3,12 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { renderMergedProps } from './RouterHelpers';
 
-//TODO a clear hack to be fixed by trolling through the docs
-let loggedInRoute;
 const PrivateRoute = ({ component, loggedIn, ...rest }) => {
-  loggedInRoute = loggedIn;
   return (
     <Route
       {...rest}
       render={props => {
-        return loggedInRoute
+        return loggedIn
           ? renderMergedProps(component, props, rest)
           : <Redirect
               to={{
