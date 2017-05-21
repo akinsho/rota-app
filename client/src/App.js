@@ -39,23 +39,24 @@ const AppContainer = styled.div`
 
 class App extends Component {
   render() {
-    //console.log('databaseInfo', this.props.data);
     const { users } = this.props.data;
     const { loggedIn } = this.props.session;
     return (
       <Router>
         <AppContainer>
           <Nav showShifts={this.props.showShifts} users={users} />
-          <Route exact path="/" component={Login} />
+          <Route exact path="/login" component={Login} />
           <PrivateRoute
             loggedIn={loggedIn}
+            users={users}
             path="/calendar"
-            render={() => <Calendar users={users} />}
+            component={Calendar}
           />
           <PrivateRoute
             path="/weeks-rota"
+            users={users}
             loggedIn={loggedIn}
-            render={() => <WeeksShifts users={users} />}
+            component={WeeksShifts}
           />
         </AppContainer>
       </Router>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { withRouter /*Redirect*/ } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 //import cuid from 'cuid';
 import { logIn } from './../actions/index';
 import { graphql, compose } from 'react-apollo';
@@ -30,6 +30,7 @@ class Login extends Component {
       password: '',
     },
     returning: false,
+    redirectToReferrer: false,
   };
 
   handleReturningUser = () =>
@@ -39,14 +40,7 @@ class Login extends Component {
     e.preventDefault();
     const { firstname, surname, grade } = this.state.fields;
     !this.state.returning
-      ? this.props.mutate({
-          variables: {
-            firstname,
-            surname,
-            grade,
-          },
-          refetchQueries: [{ query: userQuery }],
-        })
+      ? this.addNewUser(firstname, surname, grade)
       : this.findRegisteredUser(firstname, surname);
     //this.props.history.push('/calendar');
     this.props.logIn();
@@ -62,6 +56,18 @@ class Login extends Component {
     return registeredUser.length === 1 ? this.props.logIn() : null;
   };
 
+  addNewUser = (firstname, surname, grade) => {
+    this.props.mutate({
+      variables: {
+        firstname,
+        surname,
+        grade,
+      },
+      refetchQueries: [{ query: userQuery }],
+    });
+    this.setState({ redirectToReferrer: true });
+  };
+
   handleChange = e => {
     this.setState({
       fields: {
@@ -72,12 +78,12 @@ class Login extends Component {
   };
 
   render() {
-    //const { from } = this.props.location.state || { from: { pathname: '/' } };
-    //console.log('state', this.state);
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
     /*TODO cuid and uuid not working on this input so reliant on index....*/
-    //if (this.props.loggedIn) {
-    //return <Redirect to={from.pathname} />;
-    //}
+    if (this.state.redirectToReferrer) {
+      console.log('this.props', this.props);
+      return <Redirect to={from} />;
+    }
     const fields = Object.keys(this.state.fields);
     return (
       <LoginPage>
