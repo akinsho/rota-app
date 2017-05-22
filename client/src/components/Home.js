@@ -9,6 +9,7 @@ const Intro = styled.div`
 
 const IntroContainer = styled.div`
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +18,7 @@ const IntroContainer = styled.div`
 
 const Home = ({ users }) => (
   <IntroContainer>
-    <h1>Welcome to Rota</h1>
+    <h1>Welcome to Rota Watch [WIP]</h1>
     <Intro>
       This app aims to make rota-by-excel spreadsheets a thing of the past. You can make swaps which are synced across all app users, dynamically see changes to your rota etc [WIP 👍🏾]
     </Intro>

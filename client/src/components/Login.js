@@ -16,7 +16,7 @@ const LoginPage = styled(PageLayout)`
 
 const ReturningUser = styled(Button)`
   width: 60%;
-  background-color: palevioletred;
+  background-color: #42A5F5;
   height: 4rem;
 `;
 

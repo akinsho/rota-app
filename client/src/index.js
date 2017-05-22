@@ -8,13 +8,9 @@ import {
   createNetworkInterface,
 } from 'react-apollo';
 import defaultState from './defaultState';
-import shifts from './reducers/shiftsReducer';
-import { sessionState } from './reducers/configReducer';
+import reducer from './reducers/';
 
 import App from './App';
-// import { Provider } from 'react-redux';
-// import reducer from './reducers/';
-
 
 const networkInterface = createNetworkInterface({
   uri: 'http://localhost:3005/graphql',
@@ -25,8 +21,7 @@ const client = new ApolloClient({
 });
 
 const rootReducer = combineReducers({
-  pending: shifts,
-  session: sessionState,
+  ...reducer,
   apollo: client.reducer(),
 });
 const store = createStore(

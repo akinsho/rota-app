@@ -1,11 +1,8 @@
-// import { combineReducers } from 'redux';
-// import shifts from './shiftsReducer';
-// import shiftsToggle from './configReducer';
-// import { apollo } from './../index.js';
+import shifts from './shiftsReducer';
+import { sessionState } from './configReducer';
 
-// export default combineReducers({
-//reducers here
-// pending: shifts,
-// shiftsToggle,
-// apollo: client.reducer(),
-// });
+export default {
+  //reducers here
+  pending: shifts,
+  session: sessionState,
+};

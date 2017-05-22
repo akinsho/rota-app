@@ -15,7 +15,7 @@ export const StyledLink = styled(Link)`
 `;
 
 export const Form = styled.form`
-  background-color: grey;
+  background-color: #BBDEFB;
   width: 60%;
   height: 60%;
   display: flex;
