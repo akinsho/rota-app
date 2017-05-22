@@ -6,6 +6,8 @@ export const typeDefs = `
     id: ID!
     firstname: String!
     surname: String!
+    username: String!
+    password: String!
     grade: String!
   }
   type Shifts {
@@ -21,7 +23,7 @@ export const typeDefs = `
   type Query {
     users: [User]
     shifts: [Shifts]
-    findUser(firstname: String!, surname: String!): User
+    findUser(firstname: String!, surname: String!): [User]
   }
 
 type Mutation {

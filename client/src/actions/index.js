@@ -16,9 +16,9 @@ export function showShifts() {
   };
 }
 
-export function logIn(firstname) {
+export function logIn(username) {
   return {
     type: LOG_IN,
-    firstname,
+    username,
   }
 };

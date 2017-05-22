@@ -14,7 +14,7 @@ const ShiftContainer = styled.section`
 const UserCard = styled.article`
   height: 100%;
   width: 15%;
-  background-color: skyblue;
+  background-color: ${props => props.theme.light};
 `;
 
 const ShiftDay = styled.article`

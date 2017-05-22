@@ -14,7 +14,8 @@ const CalendarContainer = styled.div`
    display: grid;
    grid-template-columns: repeat(7, 1fr);
    grid-template-rows: repeat(5, 1fr);
-   grid-template-areas:"weekdays weekdays weekdays weekdays weekdays weekdays weekdays "
+   grid-template-areas:
+   "weekdays weekdays weekdays weekdays weekdays weekdays weekdays "
    "days days days days days days days ";
    grid-gap:0.2rem 0.2rem;
    height: 50%;
@@ -29,11 +30,11 @@ const InnerCalendarContainer = styled.div`
 const WeekDay = styled.div`
   display: grid;
   grid-area: weekdays
-  background-color: skyBlue;
+  background-color: ${props => props.theme.light};
 `;
 
 const Title = styled.h1`
-  color: skyblue;
+  color: ${props => props.theme.light};
   text-align: center;
 `;
 

@@ -34,13 +34,9 @@ const WeekDay = styled.div`
 const WeekDayTitle = styled.h2`
   height: 2rem;
   border-bottom: 0.5px solid black;
-  background-color: skyblue;
+  background-color: ${props => props.theme.light};
   margin: 0;
 `;
-
-//const Shift = styled.div`
-  //width: 100%;
-//`;
 
 const WeeksShifts = ({ users }) => (
   <WeekContainer>

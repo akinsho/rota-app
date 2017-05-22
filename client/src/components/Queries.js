@@ -6,6 +6,8 @@ export const userQuery = gql`
       id
       firstname
       surname
+      username
+      password
     }
     shifts {
       id

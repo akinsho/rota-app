@@ -38,34 +38,34 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { firstname, surname, grade } = this.state.fields;
+    const { firstname, surname, grade, password, username } = this.state.fields;
     !this.state.returning
-      ? this.addNewUser(firstname, surname, grade)
-      : this.findRegisteredUser(firstname, surname);
-    this.props.logIn();
+      ? this.addNewUser(firstname, surname, grade, password, username)
+      : this.findRegisteredUser(username, password);
+      this.props.logIn(username);
   };
 
-  findRegisteredUser = (firstname, surname) => {
-    //TODO currently fields being completed are firstname .., expected fields
-    //are password and surname
+  findRegisteredUser = (username, password) => {
     const registeredUser = this.props.data.users.filter(user => {
-      return user.firstname === firstname && user.surname === surname;
+      return user.username === username && user.password === password;
     });
-    console.log('registeredUser', registeredUser);
-    if (registeredUser.length === 1 ) {
-      this.props.logIn();
+    //FIXME checks db res for sensitive data need to fix actual db query
+    if (registeredUser.length === 1) {
+      console.log('in user block');
       this.setState({ redirectToReferrer: true });
     } else {
-        alert('you have not previously registered with us');
+      alert('you have not previously registered with us');
     }
   };
 
-  addNewUser = (firstname, surname, grade) => {
+  addNewUser = (firstname, surname, grade, password, username) => {
     this.props.mutate({
       variables: {
         firstname,
         surname,
         grade,
+        password,
+        username,
       },
       refetchQueries: [{ query: userQuery }],
     });

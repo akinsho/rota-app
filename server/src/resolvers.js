@@ -11,12 +11,10 @@ export const resolvers = {
         .catch(err => err),
     findUser: (root, args) => {
       console.log('args', args);
-      db
-        .query(`SELECT * FROM users WHERE users.firstname = $1`, [
-          args.firstname,
-        ])
-        .then(res => console.log('res', res))
-        .catch(err => console.log('err', err));
+      db.query(`SELECT * FROM users WHERE users.firstname = $1`, [
+        args.firstname,
+        args.surname,
+      ]).then(res => console.log('res', res))
     },
   },
   Mutation: {

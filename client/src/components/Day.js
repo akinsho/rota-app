@@ -12,6 +12,7 @@ const DayContainer = styled.div`
   border: 1px solid skyBlue;
   width:100%;
   height:100%;
+  overflow: scroll;
 `;
 
 const Day = ({ dayOfMonth, shifts, month }) => {
