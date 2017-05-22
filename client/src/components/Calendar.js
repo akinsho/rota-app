@@ -5,8 +5,9 @@ import styled from 'styled-components';
 import { compose, graphql } from 'react-apollo';
 import { month, daysOfWeek, weeksInAMonth } from './../lib/DateHelpers';
 import Day from './Day';
+import { showShifts } from './../actions';
 import Shifts from './Shifts';
-import { PageLayout } from './styled';
+import { PageLayout, Button } from './styled';
 import { userQuery } from './Queries';
 
 const CalendarContainer = styled.div`
@@ -61,6 +62,7 @@ class Calendar extends Component {
             </InnerCalendarContainer>
           ))}
         </CalendarContainer>
+        <Button onClick={this.props.showShifts}>Show My Shifts</Button>
         {this.props.showShifts && <Shifts />}
       </PageLayout>
     );
@@ -76,5 +78,5 @@ function mapStateToProps(state) {
 
 export default compose(
   graphql(userQuery, { options: { pollInterval: 5000 } }),
-  connect(mapStateToProps)
+  connect(mapStateToProps, { showShifts })
 )(Calendar);

@@ -21,6 +21,7 @@ export const typeDefs = `
   type Query {
     users: [User]
     shifts: [Shifts]
+    findUser(firstname: String!, surname: String!): User
   }
 
 type Mutation {

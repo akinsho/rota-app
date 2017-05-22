@@ -9,6 +9,15 @@ export const resolvers = {
         .query(`SELECT * FROM users,shifts WHERE users.id = shifts.assigned`)
         .then(res => res)
         .catch(err => err),
+    findUser: (root, args) => {
+      console.log('args', args);
+      db
+        .query(`SELECT * FROM users WHERE users.firstname = $1`, [
+          args.firstname,
+        ])
+        .then(res => console.log('res', res))
+        .catch(err => console.log('err', err));
+    },
   },
   Mutation: {
     addUser: (root, args) => {

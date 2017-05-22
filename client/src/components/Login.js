@@ -42,7 +42,6 @@ class Login extends Component {
     !this.state.returning
       ? this.addNewUser(firstname, surname, grade)
       : this.findRegisteredUser(firstname, surname);
-    //this.props.history.push('/calendar');
     this.props.logIn();
   };
 
@@ -53,7 +52,12 @@ class Login extends Component {
       return user.firstname === firstname && user.surname === surname;
     });
     console.log('registeredUser', registeredUser);
-    return registeredUser.length === 1 ? this.props.logIn() : null;
+    if (registeredUser.length === 1 ) {
+      this.props.logIn();
+      this.setState({ redirectToReferrer: true });
+    } else {
+        alert('you have not previously registered with us');
+    }
   };
 
   addNewUser = (firstname, surname, grade) => {
@@ -81,7 +85,6 @@ class Login extends Component {
     const { from } = this.props.location.state || { from: { pathname: '/' } };
     /*TODO cuid and uuid not working on this input so reliant on index....*/
     if (this.state.redirectToReferrer) {
-      console.log('this.props', this.props);
       return <Redirect to={from} />;
     }
     const fields = Object.keys(this.state.fields);
