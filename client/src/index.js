@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider } from 'styled-components';
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
 import {
@@ -9,7 +10,7 @@ import {
 } from 'react-apollo';
 import defaultState from './defaultState';
 import reducer from './reducers/';
-
+import theme from './theme';
 import App from './App';
 
 const networkInterface = createNetworkInterface({
@@ -31,9 +32,12 @@ const store = createStore(
   compose(applyMiddleware(client.middleware()))
 );
 
+
 ReactDOM.render(
   <ApolloProvider store={store} client={client}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+  </ThemeProvider>
   </ApolloProvider>,
   document.getElementById('root')
 );
