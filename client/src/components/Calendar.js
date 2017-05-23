@@ -15,6 +15,7 @@ const CalendarContainer = styled.div`
    grid-template-columns: repeat(7, 1fr);
    grid-template-rows: repeat(5, 1fr);
    grid-template-areas:
+   "title title title title title title title "
    "weekdays weekdays weekdays weekdays weekdays weekdays weekdays "
    "days days days days days days days ";
    grid-gap:0.2rem 0.2rem;
@@ -36,6 +37,7 @@ const WeekDay = styled.div`
 const Title = styled.h1`
   color: ${props => props.theme.light};
   text-align: center;
+  grid-area: title;
 `;
 
 class Calendar extends Component {
@@ -43,9 +45,11 @@ class Calendar extends Component {
     const { currentMonth } = this.props.pending;
     const { data } = this.props;
     return (
-      <PageLayout>
-        <Title>{month}</Title>
+      <PageLayout row>
+        <Button onClick={this.props.showShifts}>Show My Shifts</Button>
+        {this.props.shiftsToggle && <Shifts />}
         <CalendarContainer>
+          <Title>{month}</Title>
           {daysOfWeek.map((day, dayIndex) => (
             <InnerCalendarContainer key={uuid()}>
               <WeekDay>{day}</WeekDay>
@@ -63,8 +67,6 @@ class Calendar extends Component {
             </InnerCalendarContainer>
           ))}
         </CalendarContainer>
-        <Button onClick={this.props.showShifts}>Show My Shifts</Button>
-        {this.props.showShifts && <Shifts />}
       </PageLayout>
     );
   }
@@ -73,7 +75,7 @@ class Calendar extends Component {
 function mapStateToProps(state) {
   return {
     pending: state.pending,
-    showShifts: state.session.shiftsToggle,
+    shiftsToggle: state.session.shiftsToggle,
   };
 }
 

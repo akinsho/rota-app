@@ -13,13 +13,18 @@ const DayContainer = styled.div`
   width:100%;
   height:100%;
   overflow: scroll;
+  width: 5rem;
+  height: 5rem;
 `;
 
 const Day = ({ dayOfMonth, shifts, month }) => {
   return (
     <DayContainer>
       {dayOfMonth > Number(daysInCurrentMonth) ? null : dayOfMonth}
-      {shifts && shifts.map( shift => shift.day === dayOfMonth
+      {shifts &&
+        shifts.map(
+          shift =>
+            shift.day === dayOfMonth
               ? <StyledLink key={uuid()} to="/weeks-rota">
                   <div>
                     <p>{shift.time}</p>

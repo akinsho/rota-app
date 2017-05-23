@@ -4,24 +4,22 @@ import styled from 'styled-components';
 import uuid from 'uuid';
 
 const ShiftContainer = styled.section`
-  width: 100%;
-  height: 20em;
-  border-top: black 1px solid;
-  display: flex;
+  width: 12rem;
+  height: 100%;
+  display: column;
   margin-top: 1rem;
+  margin-right: 2rem;
 `;
 
 const UserCard = styled.article`
-  height: 100%;
-  width: 15%;
+  width: 100%;
+  height: 5rem;
   background-color: ${props => props.theme.light};
 `;
 
 const ShiftDay = styled.article`
-  height: 100%;
-  width: 14%;
+  width: 100%;
   background-color: whitesmoke;
-  border-right:1px solid black;
   padding: 0.5rem;
 `;
 
