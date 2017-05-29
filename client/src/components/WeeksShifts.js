@@ -5,6 +5,7 @@ import { daysOfWeek } from './../lib/DateHelpers';
 import uuid from 'uuid';
 
 const WeekGrid = styled.div`
+  width: 90%;
   display: flex;
   box-shadow: 0 1px 1px grey;
 `;
@@ -30,6 +31,12 @@ const WeekDay = styled.div`
   background-color: whitesmoke;
 `;
 
+const Shift = styled.div`
+  width: 100%;
+  height: 25%;
+  border-bottom: black 1px solid;
+`;
+
 const WeekDayTitle = styled.h2`
   height: 2rem;
   border-bottom: 0.5px solid black;
@@ -43,7 +50,7 @@ const WeeksShifts = ({ users }) => (
       {daysOfWeek.map(weekday => (
         <WeekDay key={uuid()}>
           <WeekDayTitle>{weekday}</WeekDayTitle>
-          {/*<p>{users.map(user => user.)}</p>*/}
+          {Array.from({ length: 4 }, () => <Shift />)}
         </WeekDay>
       ))}
     </WeekGrid>
@@ -51,11 +58,11 @@ const WeeksShifts = ({ users }) => (
 );
 
 WeeksShifts.defaultProps = {
-  users: [],
+  users: []
 };
 
 WeeksShifts.propTypes = {
-  users: PropTypes.array,
+  users: PropTypes.array
 };
 
 export default WeeksShifts;

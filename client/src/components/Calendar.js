@@ -45,9 +45,7 @@ class Calendar extends Component {
     const { currentMonth } = this.props.pending;
     const { data } = this.props;
     return (
-      <PageLayout row>
-        <Button onClick={this.props.showShifts}>Show My Shifts</Button>
-        {this.props.shiftsToggle && <Shifts />}
+      <PageLayout>
         <CalendarContainer>
           <Title>{month}</Title>
           {daysOfWeek.map((day, dayIndex) => (
@@ -67,6 +65,8 @@ class Calendar extends Component {
             </InnerCalendarContainer>
           ))}
         </CalendarContainer>
+        {this.props.shiftsToggle && <Shifts />}
+        <Button onClick={this.props.showShifts}>Show My Shifts</Button>
       </PageLayout>
     );
   }
@@ -75,7 +75,7 @@ class Calendar extends Component {
 function mapStateToProps(state) {
   return {
     pending: state.pending,
-    shiftsToggle: state.session.shiftsToggle,
+    shiftsToggle: state.session.shiftsToggle
   };
 }
 

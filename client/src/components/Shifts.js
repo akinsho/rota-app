@@ -4,11 +4,10 @@ import styled from 'styled-components';
 import uuid from 'uuid';
 
 const ShiftContainer = styled.section`
-  width: 12rem;
-  height: 100%;
+  width: 100%;
+  height: auto;
   display: column;
-  margin-top: 1rem;
-  margin-right: 2rem;
+  left:0%;
 `;
 
 const UserCard = styled.article`
@@ -36,7 +35,6 @@ class Shifts extends Component {
           <ShiftDay key={uuid()}>
             <ShiftDetail>
               Date:
-              {' '}
               {`${shift.date}/0${this.props.currentMonth.month}/${this.props.currentMonth.year}`}
             </ShiftDetail>
             <ShiftDetail>Assigned: {shift.assigned}</ShiftDetail>
@@ -51,7 +49,7 @@ class Shifts extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentMonth: state.pending.currentMonth,
+    currentMonth: state.pending.currentMonth
   };
 }
 
