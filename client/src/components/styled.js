@@ -10,6 +10,13 @@ const font = css`
   }
 `;
 
+export const media = {
+  handheld: (...args) => css`
+    @media (max-width: 420px) {
+      ${css(...args)}
+    }
+  `
+};
 export const StyledLink = styled(Link)`
   ${font};
 `;
@@ -23,6 +30,10 @@ export const Form = styled.form`
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  
+  ${media.handheld`
+      width: 80%;
+  `}
 `;
 
 export const Input = styled.input`

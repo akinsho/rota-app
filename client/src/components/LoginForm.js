@@ -28,7 +28,7 @@ const LoginForm = ({ fields, handleChange }) => (
 
 LoginForm.propTypes = {
   fields: PropTypes.array,
-  handleChange: PropTypes.func,
+  handleChange: PropTypes.func
 };
 
 export default LoginForm;

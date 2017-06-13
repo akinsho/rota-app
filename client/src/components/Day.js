@@ -13,8 +13,6 @@ const DayContainer = styled.div`
   width:100%;
   height:100%;
   overflow: scroll;
-  width: 5rem;
-  height: 5rem;
 `;
 
 const Day = ({ dayOfMonth, shifts, month }) => {
@@ -40,7 +38,7 @@ const Day = ({ dayOfMonth, shifts, month }) => {
 Day.propTypes = {
   shifts: PropTypes.array,
   dayOfMonth: PropTypes.number,
-  month: PropTypes.number,
+  month: PropTypes.number
 };
 
 export default Day;

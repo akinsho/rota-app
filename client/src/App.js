@@ -25,9 +25,12 @@ injectGlobal`
    box-sizing: inherit
    font-family: 'Helvetica', sans-serif;
   }
+  button {
+   font-size: inherit;
+  }
 `;
 
-  //background-color: #E3F2FD;
+//background-color: #E3F2FD;
 const AppContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -45,7 +48,7 @@ class App extends Component {
     return (
       <Router>
         <AppContainer>
-          <Nav users={users} loggedIn={loggedIn} />
+          <Nav users={users} session={this.props.session} />
           <PropsRoute exact path="/" component={Home} users={users} />
           <Route path="/login" component={Login} />
           <PrivateRoute
@@ -68,7 +71,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    session: state.session,
+    session: state.session
   };
 };
 

@@ -8,7 +8,7 @@ import { graphql, compose } from 'react-apollo';
 import { AddUserMutation } from './Mutations';
 import { userQuery } from './Queries.js';
 import LoginForm from './LoginForm';
-import { PageLayout, Button, Form } from './styled';
+import { PageLayout, Button, Form, media } from './styled';
 
 const LoginPage = styled(PageLayout)`
   height: 100vh;
@@ -18,6 +18,10 @@ const ReturningUser = styled(Button)`
   width: 60%;
   background-color: #42A5F5;
   height: 4rem;
+  padding: 0.3em;
+  ${media.handheld`
+      width: 80%;
+  `}
 `;
 
 class Login extends Component {
@@ -27,10 +31,10 @@ class Login extends Component {
       surname: '',
       grade: '',
       username: '',
-      password: '',
+      password: ''
     },
     returning: false,
-    redirectToReferrer: false,
+    redirectToReferrer: false
   };
 
   handleReturningUser = () =>
@@ -42,7 +46,7 @@ class Login extends Component {
     !this.state.returning
       ? this.addNewUser(firstname, surname, grade, password, username)
       : this.findRegisteredUser(username, password);
-      this.props.logIn(username);
+    this.props.logIn(username);
   };
 
   findRegisteredUser = (username, password) => {
@@ -65,9 +69,9 @@ class Login extends Component {
         surname,
         grade,
         password,
-        username,
+        username
       },
-      refetchQueries: [{ query: userQuery }],
+      refetchQueries: [{ query: userQuery }]
     });
     this.setState({ redirectToReferrer: true });
   };
@@ -76,8 +80,8 @@ class Login extends Component {
     this.setState({
       fields: {
         ...this.state.fields,
-        [e.target.name]: e.target.value,
-      },
+        [e.target.name]: e.target.value
+      }
     });
   };
 
@@ -111,7 +115,7 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   return {
-    loggedIn: state.session.loggedIn,
+    loggedIn: state.session.loggedIn
   };
 }
 

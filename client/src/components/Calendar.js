@@ -11,6 +11,8 @@ import { PageLayout, Button } from './styled';
 import { userQuery } from './Queries';
 
 const CalendarContainer = styled.div`
+   width: 85%;
+   margin: 1em;
    display: grid;
    grid-template-columns: repeat(7, 1fr);
    grid-template-rows: repeat(5, 1fr);
@@ -18,7 +20,7 @@ const CalendarContainer = styled.div`
    "title title title title title title title "
    "weekdays weekdays weekdays weekdays weekdays weekdays weekdays "
    "days days days days days days days ";
-   grid-gap:0.2rem 0.2rem;
+   grid-gap:0.2rem;
    height: 50%;
   text-align: center;
 `;
@@ -38,6 +40,16 @@ const Title = styled.h1`
   color: ${props => props.theme.light};
   text-align: center;
   grid-area: title;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ShowShifts = styled(Button)`
+  width: 8em;
+`;
+const CalendarDetails = styled.div`
+  
 `;
 
 class Calendar extends Component {
@@ -47,7 +59,12 @@ class Calendar extends Component {
     return (
       <PageLayout>
         <CalendarContainer>
-          <Title>{month}</Title>
+          <Title>
+            {month}
+            <ShowShifts onClick={this.props.showShifts}>
+              Show My Shifts
+            </ShowShifts>
+          </Title>
           {daysOfWeek.map((day, dayIndex) => (
             <InnerCalendarContainer key={uuid()}>
               <WeekDay>{day}</WeekDay>
@@ -66,7 +83,6 @@ class Calendar extends Component {
           ))}
         </CalendarContainer>
         {this.props.shiftsToggle && <Shifts />}
-        <Button onClick={this.props.showShifts}>Show My Shifts</Button>
       </PageLayout>
     );
   }

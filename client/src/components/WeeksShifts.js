@@ -50,7 +50,7 @@ const WeeksShifts = ({ users }) => (
       {daysOfWeek.map(weekday => (
         <WeekDay key={uuid()}>
           <WeekDayTitle>{weekday}</WeekDayTitle>
-          {Array.from({ length: 4 }, () => <Shift />)}
+          {Array.from({ length: 4 }, () => <Shift key={uuid()} />)}
         </WeekDay>
       ))}
     </WeekGrid>
